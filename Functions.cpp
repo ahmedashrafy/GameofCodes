@@ -87,9 +87,9 @@ void Display_Splash(RenderWindow& window)
 }
 void Change_Theme(int index, Block* Map [8] [8])
 {
-    for (int i = 0; i<9; i++)
+    for (int i = 0; i<8; i++)
     {
-        for (int j = 0; j<9; j++)
+        for (int j = 0; j<8; j++)
         {
             Map[i][j]->setTheme(index);
         }
