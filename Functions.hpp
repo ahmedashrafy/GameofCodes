@@ -6,6 +6,6 @@
 
 void Play_Sound(int index);
 void Display_Splash();
-void Change_Theme(int index, Block* Map [9] [9]);
-
+void Change_Theme(int index, Block* Map [8] [8]);
+void Map_Parser(ifstream &file,Block* Map [8] [8]);
 #endif /* Functions_hpp */
