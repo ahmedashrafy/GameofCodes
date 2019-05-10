@@ -8,19 +8,19 @@
 #include <string>
 using namespace std;
 using namespace sf;
-void Map_Parser(ifstream &file,Block* Map [8] [8]){
-    string str[9];
-    file.open("level1.txt");
+void Map_Parser(ifstream &file,Block* Map [15] [15], int levelNum){
+    string str[16];
+    file.open("level" + to_string(levelNo) + ".txt");
     if (!file.is_open()){
         cout<<"Unable to open file";
     }
-    for(int i=0;i<9;i++){
+    for(int i=0;i<16;i++){
         getline(file, str[i]);
     }
-    int counter=stoi(str[8]);
+    int counter=stoi(str[0]);
     file.close();
-    for(int i=0;i<8;i++){
-        for(int j=0;j<8;j++){
+    for(int i=0;i<15;i++){
+        for(int j=0;j<15;j++){
             if(str[i][j]=='#'){
                 Map[i][j]= new WallBlock;
                 Map[i][j]->setPosition(j*50+100, i*50+100);
@@ -53,6 +53,7 @@ void Map_Parser(ifstream &file,Block* Map [8] [8]){
                 Map[i][j]= new AddMoves;
                 Map[i][j]->setPosition(j*50+100, i*50+100);
             }
+            
     }
 }
 void Play_Sound(int index)
@@ -85,11 +86,11 @@ void Display_Splash(RenderWindow& window)
     while(clock.getElapsedTime()<seconds(5))
     { };
 }
-void Change_Theme(int index, Block* Map [8] [8])
+void Change_Theme(int index, Block* Map [15] [15])
 {
-    for (int i = 0; i<8; i++)
+    for (int i = 0; i<15; i++)
     {
-        for (int j = 0; j<8; j++)
+        for (int j = 0; j<15; j++)
         {
             Map[i][j]->setTheme(index);
         }
