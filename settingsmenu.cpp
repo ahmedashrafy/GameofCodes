@@ -1,5 +1,3 @@
-
-
 #include "settingsmenu.hpp"
 #include <iostream>
 using namespace std;
@@ -20,7 +18,20 @@ settingsmenu::settingsmenu()
     if (!textures[0].loadFromFile(resourcePath() + "Arya_selection.003.png")) {
         cout<<"Error failed to load arya selection"<<endl;
     }
-    //HomeButton
+    
+    //Volume Button
+    if (!volumeButtonTexture.loadFromFile(resourcePath() + "volumebutton.png"))
+    {
+        std::cout << "Failed to load volume button spritesheet!" << endl;
+    }
+    box[1].setFillColor(Color::White);
+    box[1].setPosition(Vector2f(900, 50));
+    box[1].setSize(Vector2f(75,75));
+    volumeButton.setTexture(&volumeButtonTexture);
+    volumeButton.setPosition(Vector2f(900, 50));
+    volumeButton.setSize(Vector2f(75,75));
+    
+    //Home Button
     if (!homeButtonTexture.loadFromFile(resourcePath() + "homeButton.jpg")) {
         cout << "Failed to load home button spritesheet!" <<endl;
     }
@@ -28,9 +39,9 @@ settingsmenu::settingsmenu()
     homeButton.setTexture(&homeButtonTexture);
     homeButton.setPosition(Vector2f(50, 50));
     homeButton.setSize(Vector2f(75,75));
-    box.setPosition(Vector2f(50, 50));
-    box.setSize(Vector2f(75,75));
-    box.setFillColor(Color::White);
+    box[0].setPosition(Vector2f(50, 50));
+    box[0].setSize(Vector2f(75,75));
+    box[0].setFillColor(Color::White);
     
     //Text            //Red (167,14,14)   Brown (150,128,75)
     //Title
@@ -71,7 +82,9 @@ settingsmenu::settingsmenu()
 void settingsmenu::draw(RenderWindow& window) {
     window.clear();
     window.draw(background);
+    window.draw(box[1]);
     window.draw(homeButton);
+    window.draw(volumeButton);
     for(int i=0;i<3;i++){
         window.draw(themes[i]);
         window.draw(selections[i]);
@@ -123,7 +136,13 @@ bool settingsmenu::mousePressed(int buttonNum, RenderWindow &window) {
             }
             break;
         case 3: //Home button
-            if (box.getGlobalBounds().contains(Mouse::getPosition(window).x, Mouse::getPosition(window).y)) {
+            if (box[0].getGlobalBounds().contains(Mouse::getPosition(window).x, Mouse::getPosition(window).y)) {
+                if (Mouse::isButtonPressed(Mouse::Left) && Event::MouseButtonReleased)
+                    return true;
+                return false;
+            }
+        case 4: //Volume button
+            if (box[1].getGlobalBounds().contains(Mouse::getPosition(window).x, Mouse::getPosition(window).y)) {
                 if (Mouse::isButtonPressed(Mouse::Left) && Event::MouseButtonReleased)
                     return true;
                 return false;
@@ -132,5 +151,27 @@ bool settingsmenu::mousePressed(int buttonNum, RenderWindow &window) {
      
     return false;
 }
-
+void settingsmenu::volumePress(bool& soundOn) {
+    if (soundOn) {
+        //Switch to off
+        soundOn = false;
+        Texture temp;
+        if (!volumeButtonTexture.loadFromFile(resourcePath() + "novolumebutton.jpg"))
+        {
+            std::cout << "Failed to load no volume button spritesheet!" << endl;
+        }
+        volumeButtonTexture.update(temp);
+    }
+    else {
+        //Switch to on
+        soundOn = true;
+        Texture temp;
+        if (!volumeButtonTexture.loadFromFile(resourcePath() + "volumebutton.png"))
+        {
+            cout << "Failed to load volume button spritesheet!" << endl;
+        }
+        volumeButtonTexture.update(temp);
+    }
+    
+}
 
