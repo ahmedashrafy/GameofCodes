@@ -1,10 +1,4 @@
-//
-//  settingsmenu.hpp
-//  menu
-//
-//  Created by Habeeba Mansour on 5/10/19.
-//  Copyright © 2019 Habeeba Mansour. All rights reserved.
-//
+
 
 #ifndef settingsmenu_hpp
 #define settingsmenu_hpp
