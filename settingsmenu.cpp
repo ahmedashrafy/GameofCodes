@@ -1,10 +1,4 @@
-//
-//  settingsmenu.cpp
-//  menu
-//
-//  Created by Habeeba Mansour on 5/10/19.
-//  Copyright © 2019 Habeeba Mansour. All rights reserved.
-//
+
 
 #include "settingsmenu.hpp"
 #include <iostream>
@@ -95,7 +89,10 @@ bool settingsmenu::mousePressed(int buttonNum, RenderWindow &window) {
         case 0: //Theme Arya button
             if (themes[0].getGlobalBounds().contains(Mouse::getPosition(window).x, Mouse::getPosition(window).y)) {
                 if (Mouse::isButtonPressed(Mouse::Left) && Event::MouseButtonReleased){
-                    themes[0].setFillColor(Color(128,128,128));
+                    if(themes[0].getFillColor()==Color::White)
+                        themes[0].setFillColor(Color(128,128,128));
+                    else
+                        themes[0].setFillColor(Color::White);
                     return true;
                 }
                 return false;
@@ -104,7 +101,10 @@ bool settingsmenu::mousePressed(int buttonNum, RenderWindow &window) {
         case 1: //Theme Cersei button
             if (themes[1].getGlobalBounds().contains(Mouse::getPosition(window).x, Mouse::getPosition(window).y)) {
                 if (Mouse::isButtonPressed(Mouse::Left) && Event::MouseButtonReleased){
-                    themes[1].setFillColor(Color(128,128,128));
+                    if(themes[1].getFillColor()==Color::White)
+                        themes[1].setFillColor(Color(128,128,128));
+                    else
+                        themes[1].setFillColor(Color::White);
                     return true;
                 }
                 return false;
@@ -113,7 +113,10 @@ bool settingsmenu::mousePressed(int buttonNum, RenderWindow &window) {
         case 2: //Theme Jon button
             if (themes[2].getGlobalBounds().contains(Mouse::getPosition(window).x, Mouse::getPosition(window).y)) {
                 if (Mouse::isButtonPressed(Mouse::Left) && Event::MouseButtonReleased){
-                    themes[2].setFillColor(Color(128,128,128));
+                    if(themes[2].getFillColor()==Color::White)
+                        themes[2].setFillColor(Color(128,128,128));
+                    else
+                        themes[2].setFillColor(Color::White);
                     return true;
                 }
                 return false;
@@ -129,6 +132,5 @@ bool settingsmenu::mousePressed(int buttonNum, RenderWindow &window) {
      
     return false;
 }
-
 
 
