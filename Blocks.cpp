@@ -3,7 +3,7 @@
 //Parent Class: Block
     Block::Block()
     {
-        Object.setSize(Vector2f(100,100));
+        Object.setSize(Vector2f(50,50));
         Special = 0;
     }
 
@@ -19,7 +19,7 @@
         ID = "MovingBlock";
         nID = 1;
         Texture temp;
-        temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_1/MoveableBlock.png");
+        temp.loadFromFile("/Resources/Blocks/Theme_1/MoveableBlock.png");
         
         Object.setTexture(&temp);
     }
@@ -79,11 +79,11 @@
         switch(themeNumber)
         {
             case 1:
-                temp.loadFromFile("res/Blocks/MovingBlock_1.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_1/Moveable_Block.png");
             case 2:
-                temp.loadFromFile("res/Blocks/MovingBlock_2.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_2/Moveable_Block.png");
             case 3:
-                temp.loadFromFile("res/Blocks/MovingBlock_3.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_3/Moveable_Block.png");
         }
         
         Object.setTexture(&temp);
@@ -96,7 +96,7 @@
         ID = "WallBlock";
         nID = 2;
         Texture temp;
-        temp.loadFromFile("Resources/Blocks/Theme_1/WallBlock.png");
+        temp.loadFromFile("/Resources/Blocks/Theme_1/Wall_Block.png");
         
         Object.setTexture(&temp);
     }
@@ -113,11 +113,11 @@
         switch(themeNumber)
         {
             case 1:
-                temp.loadFromFile("res/Blocks/WallBlock_1.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_1/Wall_Block.png");
             case 2:
-                temp.loadFromFile("res/Blocks/WallBlock_2.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_2/Wall_Block.png");
             case 3:
-                temp.loadFromFile("res/Blocks/WallBlock_3.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_3/Wall_Block.png");
         }
         
         Object.setTexture(&temp);
@@ -149,8 +149,8 @@
         ID = "TargetBlock";
         nID = 4;
         Texture temp;
-        temp.loadFromFile("Resources/Blocks/Theme_1/TargetBlock.png");
-        
+        temp.loadFromFile("/Resources/Blocks/Theme_1/Target_Block.png");
+
         Object.setTexture(&temp);
     }
 
@@ -166,11 +166,11 @@
         switch(themeNumber)
         {
             case 1:
-                temp.loadFromFile("res/Blocks/TargetBlock_1.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_1/Target_Block.png");
             case 2:
-                temp.loadFromFile("res/Blocks/TargetBlock_2.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_2/Target_Block.png");
             case 3:
-                temp.loadFromFile("res/Blocks/TargetBlock_3.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_3/Target_Block.png");
         }
         
         Object.setTexture(&temp);
@@ -196,8 +196,8 @@
         ID = "SandBlock";
         nID = 5;
         Texture temp;
-        temp.loadFromFile("Resources/Blocks/Theme_1/SandBlock.png");
-        
+        temp.loadFromFile("/Resources/Blocks/Theme_1/Sand_Block.png");
+
         Object.setTexture(&temp);
     }
     SandBlock::~SandBlock()
@@ -212,11 +212,11 @@
         switch(themeNumber)
         {
             case 1:
-                temp.loadFromFile("res/Blocks/SandBlock_1.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_1/Sand_Block.png");
             case 2:
-                temp.loadFromFile("res/Blocks/SandBlock_2.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_2/Sand_Block.png");
             case 3:
-                temp.loadFromFile("res/Blocks/SandBlock_3.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_3/Sand_Block.png");
         }
         
         Object.setTexture(&temp);
@@ -228,8 +228,8 @@
         ID = "AddLives";
         nID = 6;
         Texture temp;
-        temp.loadFromFile("Resources/Blocks/Theme_1/AddLives.png");
-        
+        temp.loadFromFile("/Resources/Blocks/Theme_1/Add_Lives.png");
+
         Object.setTexture(&temp);
         
         Special = 1;
@@ -247,11 +247,11 @@
         switch(themeNumber)
         {
             case 1:
-                temp.loadFromFile("res/Blocks/AddLives_1.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_1/Add_Lives.png");
             case 2:
-                temp.loadFromFile("res/Blocks/AddLives_2.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_2/Add_Lives.png");
             case 3:
-                temp.loadFromFile("res/Blocks/AddLives_3.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_3/Add_Lives.png");
         }
         
         Object.setTexture(&temp);
@@ -269,8 +269,8 @@
         ID = "AddMoves";
         nID = 7;
         Texture temp;
-        temp.loadFromFile("Resources/Blocks/Theme_1/AddMoves.png");
-        
+        temp.loadFromFile("/Resources/Blocks/Theme_1/Add_Moves.png");
+
         Object.setTexture(&temp);
         
         Special = 2;
@@ -288,11 +288,11 @@
         switch(themeNumber)
         {
             case 1:
-                temp.loadFromFile("res/Blocks/AddMoves_1.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_1/Add_Moves.png");
             case 2:
-                temp.loadFromFile("res/Blocks/AddMoves_2.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_2/Add_Moves.png");
             case 3:
-                temp.loadFromFile("res/Blocks/AddMoves_3.png");
+                temp.loadFromFile("/Resources/Blocks/Theme_3/Add_Moves.png");
         }
         
         Object.setTexture(&temp);

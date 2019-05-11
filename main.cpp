@@ -1,5 +1,3 @@
-#include "UniversalHeader.hpp"
-
 #include "settingsmenu.hpp"
 #include "mainmenu.hpp"
 #include "Functions.hpp"
@@ -10,7 +8,7 @@ int main()
         RenderWindow window;
         window.create(VideoMode(1000,1000),"Sokoban");
         
-        Play_Game(window); 
+        //Display_Splash(window);
+        Display_Menu(window);
     }
-
 

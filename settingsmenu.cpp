@@ -13,7 +13,13 @@ settingsmenu::settingsmenu()
     background.setTexture(backgroundTexture);
     
     //Seelcetions
-    if (!textures[0].loadFromFile(resourcePath() + "/Resources/Menu/Arya_selection.003.png")) {
+    if (!textures[0].loadFromFile(resourcePath() + "/Resources/Players/Arya/Character Selection.png")) {
+        cout<<"Error failed to load arya selection"<<endl;
+    }
+    if (!textures[1].loadFromFile(resourcePath() + "/Resources/Players/Jaime/Character Selection.png")) {
+        cout<<"Error failed to load arya selection"<<endl;
+    }
+    if (!textures[2].loadFromFile(resourcePath() + "/Resources/Players/Jon/Character Selection.png")) {
         cout<<"Error failed to load arya selection"<<endl;
     }
     
@@ -64,14 +70,14 @@ settingsmenu::settingsmenu()
     }
     texts[1].setString("Arya in Braavos");
     texts[1].setPosition(390, 200+ 230);
-    texts[2].setString("Cersei in Kings Landing");
+    texts[2].setString("Jaime in Kings Landing");
     texts[2].setPosition(340, 200+ 430);
     texts[3].setString("Jon North of the Wall");
     texts[3].setPosition(350, 200+ 640);
     
     //Theme sprites
     for(int i=0;i<3;i++){
-        selections[i].setTexture(&textures[0]);
+        selections[i].setTexture(&textures[i]);
         selections[i].setPosition(Vector2f(425,275+ 200*i));
         selections[i].setSize(Vector2f(150,150));
     }

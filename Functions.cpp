@@ -2,88 +2,118 @@
 
 void Map_Parser(int level, Block* Map [15] [15], Player* CurrentPlayer)
 {
-    fstream file;
-    string LevelNumber = to_string(level);
-    string LevelName = "/Resources/Levels/level"+LevelNumber+".txt";
-    string str[15];
-    file.open(resourcePath()+LevelName);
-    if (!file.is_open()){
-        cout<<"Unable to open file";
-    }
-    for(int i=0;i<15;i++){
-        getline(file, str[i]);
-    }
-    file.close();
-    for(int i=0;i<15;i++)
+    if(level<8)
     {
-        for(int j=0;j<15;j++)
+        fstream file;
+        string LevelNumber = to_string(level);
+        string LevelName = "/Resources/Levels/level"+LevelNumber+".txt";
+        string str[16];
+        file.open(resourcePath()+LevelName);
+        if (!file.is_open()){
+            cout<<"Unable to open file";
+        }
+        for(int i=0;i<15;i++){
+            getline(file, str[i]);
+        }
+        file.close();
+        for(int i=0;i<15;i++)
         {
-            if(str[i][j]=='#')
+            for(int j=0;j<15;j++)
             {
-                Map[i][j]= new WallBlock;
-                Map[i][j]->setPosition(j*50+100, i*50+100);
-            }
-            else if(str[i][j]=='!')
-            {
-                Map[i][j]= new TargetBlock;
-                Map[i][j]->setPosition(j*50+100, i*50+100);
-            }
-            else if(str[i][j]=='?')
-            {
-                Map[i][j]= new MovingBlock;
-                Map[i][j]->setPosition(j*50+100, i*50+100);
-            }
-            else if(str[i][j]=='@')
-            {
-                Map[i][j]= new SandBlock;
-                Map[i][j]->setPosition(j*50+100, i*50+100);
-            }
-            else if(str[i][j]=='/')
-            {
-                Map[i][j]= new SandBlock;
-                Map[i][j]->setPosition(j*50+100, i*50+100);
-            }
-           else if(str[i][j]=='$'){
-                Map[i][j]= new SandBlock;
-                Map[i][j]->setPosition(j*50+100, i*50+100);
-                CurrentPlayer->getSprite().setPosition(j*50+100, i*50+100);
-            }
-            else if(str[i][j]=='+')
-            {
-                Map[i][j]= new AddLives;
-                Map[i][j]->setPosition(j*50+100, i*50+100);
-            }
-            else if(str[i][j]=='x')
-            {
-                Map[i][j]= new AddMoves;
-                Map[i][j]->setPosition(j*50+100, i*50+100);
+                if(str[i][j]=='#')
+                {
+                    Map[i][j]= new WallBlock;
+                    Map[i][j]->setPosition(j*50+100, i*50+100);
+                }
+                else if(str[i][j]=='!')
+                {
+                    Map[i][j]= new TargetBlock;
+                    Map[i][j]->setPosition(j*50+100, i*50+100);
+                }
+                else if(str[i][j]=='?')
+                {
+                    Map[i][j]= new MovingBlock;
+                    Map[i][j]->setPosition(j*50+100, i*50+100);
+                }
+                else if(str[i][j]=='@')
+                {
+                    Map[i][j]= new SandBlock;
+                    Map[i][j]->setPosition(j*50+100, i*50+100);
+                }
+                else if(str[i][j]=='/')
+                {
+                    Map[i][j]= new EmptyBlock;
+                    Map[i][j]->setPosition(j*50+100, i*50+100);
+                }
+                else if(str[i][j]=='$'){
+                    Map[i][j]= new SandBlock;
+                    Map[i][j]->setPosition(j*50+100, i*50+100);
+                    CurrentPlayer->getSprite().setPosition(j*50+100, i*50+100);
+                }
+                else if(str[i][j]=='+')
+                {
+                    Map[i][j]= new AddLives;
+                    Map[i][j]->setPosition(j*50+100, i*50+100);
+                }
+                else if(str[i][j]=='x')
+                {
+                    Map[i][j]= new AddMoves;
+                    Map[i][j]->setPosition(j*50+100, i*50+100);
+                }
+                else
+                {
+                    Map[i][j]= new SandBlock;
+                    Map[i][j]->setPosition(j*50+100, i*50+100);
+                }
             }
         }
     }
-}
-void Play_Sound(Sound* Sound, SoundBuffer* Buffer, int index)
-{
-    
-    switch(index) //TO BE COMPLETED AS AUDIO FILES ARE FINALIZED
+    else
     {
-        case 1:
-            Buffer->loadFromFile(resourcePath()+"Resources/Music/Track_1.ogg");
-            break;
-            
-        case 2:
-            Buffer->loadFromFile(resourcePath()+"Resources/Music/Track_2.ogg");
-            break;
-        
-        case 3:
-            Buffer->loadFromFile(resourcePath()+"Resources/Music/Track_3.ogg");
-            break;
-            
-        case 4:
-            Buffer->loadFromFile(resourcePath()+"Resources/Music/Track_4.ogg");
-            break;
+        RandomLevelGenerator(level, Map, CurrentPlayer);
     }
-    Sound->setBuffer(*Buffer);
-    Sound->play();
+}
+void Play_Sound(Sound* Sound, SoundBuffer* Buffer, int index, bool SoundOn)
+{
+    if(!SoundOn)
+    {
+        Sound->stop();
+    }
+    
+    else
+    {
+        switch(index) //TO BE COMPLETED AS AUDIO FILES ARE FINALIZED
+        {
+            case 1:
+                Buffer->loadFromFile(resourcePath()+"Resources/Music/Track_1.ogg");
+                Sound->setBuffer(*Buffer);
+                Sound->setLoop(true);
+                break;
+                
+            case 2:
+                Buffer->loadFromFile(resourcePath()+"Resources/Music/Track_2.ogg");
+                Sound->setBuffer(*Buffer);
+                Sound->setLoop(true);
+                break;
+            
+            case 3:
+                Buffer->loadFromFile(resourcePath()+"Resources/Music/Track_3.ogg");
+                Sound->setBuffer(*Buffer);
+                Sound->setLoop(true);
+                break;
+                
+            case 4:
+                Buffer->loadFromFile(resourcePath()+"Resources/Music/Track_4.ogg");
+                Sound->setBuffer(*Buffer);
+                Sound->setLoop(true); 
+                break;
+            case 5:
+                Buffer->loadFromFile(resourcePath()+"Resources/Music/Track_5.ogg");
+                Sound->setBuffer(*Buffer);
+                break;
+        }
+        Sound->play();
+    }
 }
 
 void Change_Theme(int index, Block* Map [15] [15])
@@ -97,7 +127,7 @@ void Change_Theme(int index, Block* Map [15] [15])
     }
 }
 
-void Movement_Handler (Player* CurrentPlayer, Block* Map[15][15],int stepNumber, char direction)
+void Movement_Handler (Player* CurrentPlayer, Block* Map[15][15],int stepNumber, char direction, RenderWindow* window, Text text)
 {
     bool PlayerMoved;
     
@@ -126,9 +156,14 @@ void Movement_Handler (Player* CurrentPlayer, Block* Map[15][15],int stepNumber,
                                     break;
                                 case 7: //Add Moves
                                     Map[i][j]->Invoke(CurrentPlayer);
+                                    CurrentPlayer -> animate(direction);
                                     break; 
                                 case 6: //Add Lives
                                     Map[i][j]->Invoke(CurrentPlayer);
+                                    CurrentPlayer -> animate(direction);
+                                    break;
+                                default:
+                                    CurrentPlayer -> animate(direction);
                                     break;
                             }
 
@@ -165,8 +200,13 @@ void Movement_Handler (Player* CurrentPlayer, Block* Map[15][15],int stepNumber,
                 }
             }
         
+        //Display Changes
+        Render_Game (*window, Map, CurrentPlayer, text);
+        
         //Decrementing the stepNumber
-            stepNumber--;
+        stepNumber--;
+        
+
     }
     while(stepNumber>0 && PlayerMoved);
 
@@ -195,7 +235,7 @@ void Handle_Menu(RenderWindow &window)
     }
 }
 
-void Handle_Game(RenderWindow& window, Player* CurrentPlayer, Block* Map[15][15])
+void Handle_Game(RenderWindow& window, Player* CurrentPlayer, Block* Map[15][15], Text text)
 {
     Event event;
     while(window.pollEvent(event))
@@ -209,17 +249,18 @@ void Handle_Game(RenderWindow& window, Player* CurrentPlayer, Block* Map[15][15]
             case Event::KeyPressed:
                 switch (event.key.code)
                 {
+
                     case Keyboard::Down:
-                        Movement_Handler (CurrentPlayer, Map, 25, 'D');
+                        Movement_Handler (CurrentPlayer, Map, 25, 'D', &window, text);
                         break;
                     case Keyboard::Up:
-                        Movement_Handler (CurrentPlayer, Map, 25, 'U');
+                        Movement_Handler (CurrentPlayer, Map, 25, 'U', &window, text);
                         break;
                     case Keyboard::Right:
-                        Movement_Handler (CurrentPlayer, Map, 25, 'R');
+                        Movement_Handler (CurrentPlayer, Map, 25, 'R', &window, text);
                         break;
                     case Keyboard::Left:
-                        Movement_Handler (CurrentPlayer, Map, 25, 'L');
+                        Movement_Handler (CurrentPlayer, Map, 25, 'L', &window, text);
                         break;
                 }
                 break;
@@ -237,7 +278,7 @@ void Render_Game (RenderWindow& window, Block* Map[15][15], Player* CurrentPlaye
     //Draw Map
     for (int i = 0; i<15; i++)
     {
-        for (int j=0; j<15; j++)
+        for (int j = 0;  j<15; j++)
         {
             window.draw(Map[i][j]->getRectangle());
         }
@@ -265,7 +306,7 @@ bool isOver(Player* CurrentPlayer, Block* Map[15][15])
 
 bool playerWon(Player* CurrentPlayer, Block* Map[15][15])
 {
-    for (int i=0; i<15; i++)
+    for (int i = 0; i<15; i++)
     {
         for (int j = 0; j<15; j++)
         {
@@ -276,4 +317,108 @@ bool playerWon(Player* CurrentPlayer, Block* Map[15][15])
         }
     }
     return true;
+}
+void RandomLevelGenerator(int level, Block* Map [15] [15], Player* CurrentPlayer)
+{
+    
+    //Stage 1: Solution Template Randomizer
+    int template_number;
+    
+    srand(time(NULL));
+    template_number = rand() % 6;
+    template_number++;
+    
+    string template_selection = to_string(template_number);
+    
+    //Stage 2: Using the pre-created levels as templates
+    fstream file;
+    string LevelNumber = to_string(level);
+    string LevelName = "/Resources/Level_Templates/level"+template_selection+".txt";
+    string str[16];
+    file.open(resourcePath()+LevelName);
+    if (!file.is_open()){
+        cout<<"Unable to open file";
+    }
+    for(int i=0;i<15;i++){
+        getline(file, str[i]);
+    }
+    file.close();
+    for(int i=0;i<15;i++)
+    {
+        for(int j=0;j<15;j++)
+        {
+            if(str[i][j]=='#') //Wall Block - Randomized
+                
+            {
+                Map[i][j]= BlockRandomizer();
+                Map[i][j]->setPosition(j*50+100, i*50+100);
+            }
+            else if(str[i][j]=='!') //Target Block - left as is
+            {
+                Map[i][j]= BlockRandomizer();
+                Map[i][j]->setPosition(j*50+100, i*50+100);
+            }
+            else if(str[i][j]=='?') //Moving Block - left as is
+            {
+                Map[i][j]= BlockRandomizer();
+                Map[i][j]->setPosition(j*50+100, i*50+100);
+            }
+            else if(str[i][j]=='@') //Sand Path - left as is
+            {
+                Map[i][j]= BlockRandomizer();
+                Map[i][j]->setPosition(j*50+100, i*50+100);
+            }
+            else if(str[i][j]=='/') //Empty Block - Randomized
+            {
+                Map[i][j]= BlockRandomizer();
+                Map[i][j]->setPosition(j*50+100, i*50+100);
+            }
+            else if(str[i][j]=='$'){ //Player position - left as is
+                Map[i][j]= BlockRandomizer();
+                Map[i][j]->setPosition(j*50+100, i*50+100);
+                CurrentPlayer->getSprite().setPosition(j*50+100, i*50+100);
+            }
+            else if(str[i][j]=='+') //Pickup - Randomized
+            {
+                Map[i][j]= BlockRandomizer();
+                Map[i][j]->setPosition(j*50+100, i*50+100);
+            }
+            else if(str[i][j]=='x') //Pickup - Randomized
+            {
+                Map[i][j]= BlockRandomizer();
+                Map[i][j]->setPosition(j*50+100, i*50+100);
+            }
+            
+        }
+    }
+}
+
+Block* BlockRandomizer()
+{
+    srand(time(NULL));
+    int RandomNumber = rand() % 6;
+    
+    if(RandomNumber == 0) //
+    {
+        return new WallBlock;
+    }
+    else if(RandomNumber == 1) //Sand Path - left as is
+    {
+        return new SandBlock;
+    }
+    else if(RandomNumber == 2)
+    {
+        return new EmptyBlock;
+    }
+    else if(RandomNumber == 3){ //Player position - left as is
+        return new SandBlock;
+    }
+    else if(RandomNumber == 4)
+    {
+        return new AddLives;
+    }
+    else if(RandomNumber == 5)
+    {
+        return new AddMoves;
+    }
 }
