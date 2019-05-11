@@ -1,13 +1,8 @@
-
-
 #ifndef settingsmenu_hpp
 #define settingsmenu_hpp
-#include <iostream>
-#include <stdio.h>
-#include <SFML/Graphics.hpp>
-#include "ResourcePath.hpp"
-using namespace std;
-using namespace sf;
+
+#include "UniversalHeader.hpp"
+
 class settingsmenu{
 private:
     Font font;

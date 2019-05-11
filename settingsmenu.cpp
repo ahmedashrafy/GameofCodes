@@ -1,26 +1,24 @@
 #include "settingsmenu.hpp"
-#include <iostream>
-using namespace std;
-using namespace sf;
+
 settingsmenu::settingsmenu()
 {
     //Font
-    if (!font.loadFromFile(resourcePath() + "GameOfThrones.ttf")) {
+    if (!font.loadFromFile(resourcePath() + "/Resources/Fonts/GameOfThrones.ttf")) {
         cout<<"Error failed to load font"<<endl;
     }
     //Background
-    if (!backgroundTexture.loadFromFile(resourcePath() + "settingsBackground.png")) {
+    if (!backgroundTexture.loadFromFile(resourcePath() + "/Resources/Menu/settingsBackground.png")) {
         cout<<"Error failed to load splash screen"<<endl;
     }
     background.setTexture(backgroundTexture);
     
     //Seelcetions
-    if (!textures[0].loadFromFile(resourcePath() + "Arya_selection.003.png")) {
+    if (!textures[0].loadFromFile(resourcePath() + "/Resources/Menu/Arya_selection.003.png")) {
         cout<<"Error failed to load arya selection"<<endl;
     }
     
     //Volume Button
-    if (!volumeButtonTexture.loadFromFile(resourcePath() + "volumebutton.png"))
+    if (!volumeButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/volumebutton.png"))
     {
         std::cout << "Failed to load volume button spritesheet!" << endl;
     }
@@ -32,7 +30,7 @@ settingsmenu::settingsmenu()
     volumeButton.setSize(Vector2f(75,75));
     
     //Home Button
-    if (!homeButtonTexture.loadFromFile(resourcePath() + "homeButton.jpg")) {
+    if (!homeButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/homeButton.jpg")) {
         cout << "Failed to load home button spritesheet!" <<endl;
     }
     
@@ -156,7 +154,7 @@ void settingsmenu::volumePress(bool& soundOn) {
         //Switch to off
         soundOn = false;
         Texture temp;
-        if (!volumeButtonTexture.loadFromFile(resourcePath() + "novolumebutton.jpg"))
+        if (!volumeButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/novolumebutton.jpg"))
         {
             std::cout << "Failed to load no volume button spritesheet!" << endl;
         }
@@ -166,7 +164,7 @@ void settingsmenu::volumePress(bool& soundOn) {
         //Switch to on
         soundOn = true;
         Texture temp;
-        if (!volumeButtonTexture.loadFromFile(resourcePath() + "volumebutton.png"))
+        if (!volumeButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/volumebutton.png"))
         {
             cout << "Failed to load volume button spritesheet!" << endl;
         }
