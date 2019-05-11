@@ -1,16 +1,16 @@
-#include "ResourcePath.hpp"
-#include "Blocks.hpp"
+#include "UniversalHeader.hpp"
+
+#include "settingsmenu.hpp"
+#include "mainmenu.hpp"
 #include "Functions.hpp"
-#include <SFML/Audio.hpp>
-#include <SFML/Graphics.hpp>
-#include <iostream>
+#include "MainFunctions.hpp"
 
-using namespace std;
-using namespace sf;
+int main()
+    {
+        RenderWindow window;
+        window.create(VideoMode(1000,1000),"Sokoban");
+        
+        Play_Game(window); 
+    }
 
 
-int main(int, char const**)
-{
-    
-    return EXIT_SUCCESS;
-}

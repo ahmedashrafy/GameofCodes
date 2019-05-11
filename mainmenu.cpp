@@ -1,16 +1,8 @@
-//
-//  mainmenu.cpp
-//  menu
-//
-//  Created by Habeeba Mansour on 5/9/19.
-//  Copyright © 2019 Habeeba Mansour. All rights reserved.
-//
-
 #include "mainmenu.hpp"
 mainmenu::mainmenu()
 {
     //Text
-    if (!font.loadFromFile(resourcePath() + "GameOfThrones.ttf")) {
+    if (!font.loadFromFile(resourcePath() + "/Resources/Fonts/GameOfThrones.ttf")) {
         cout<<"Error failed to load font"<<endl;
     }
     startGame.setFont(font);
@@ -23,13 +15,13 @@ mainmenu::mainmenu()
     startSettings.setString("Settings");
     
     //Background
-    if (!backgroundTexture.loadFromFile(resourcePath() + "start.001.png")) {
+    if (!backgroundTexture.loadFromFile(resourcePath() + "/Resources/Menu/start.001.png")) {
         cout<<"Error failed to load splash screen"<<endl;
     }
     background.setTexture(backgroundTexture);
     
     //Play Button
-    if (!playButtonTexture.loadFromFile(resourcePath() + "playbutton.png")) {
+    if (!playButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/playbutton.png")) {
         cout<<"Error failed to load play button"<<endl;
     }
     box[0].setFillColor(Color::White);
@@ -41,7 +33,7 @@ mainmenu::mainmenu()
     startGame.setPosition(180,620);
     
     //Settings Button
-    if (!settingsButtonTexture.loadFromFile(resourcePath() + "settingsbutton.png"))
+    if (!settingsButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/settingsbutton.png"))
     {
         std::cout << "Failed to load settings button spritesheet!" << endl;
     }
@@ -53,7 +45,7 @@ mainmenu::mainmenu()
     settingsButton.setSize(Vector2f(75,75));
     startSettings.setPosition(680,620);
     //Volume Button
-    if (!volumeButtonTexture.loadFromFile(resourcePath() + "volumebutton.png"))
+    if (!volumeButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/volumebutton.png"))
     {
         std::cout << "Failed to load volume button spritesheet!" << endl;
     }
@@ -111,7 +103,7 @@ void mainmenu::volumePress(bool& soundOn) {
         //Switch to off
         soundOn = false;
         Texture temp;
-        if (!volumeButtonTexture.loadFromFile(resourcePath() + "novolumebutton.jpg"))
+        if (!volumeButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/novolumebutton.jpg"))
         {
             std::cout << "Failed to load no volume button spritesheet!" << endl;
         }
@@ -121,7 +113,7 @@ void mainmenu::volumePress(bool& soundOn) {
         //Switch to on
         soundOn = true;
         Texture temp;
-        if (!volumeButtonTexture.loadFromFile(resourcePath() + "volumebutton.png"))
+        if (!volumeButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/volumebutton.png"))
         {
             cout << "Failed to load volume button spritesheet!" << endl;
         }
