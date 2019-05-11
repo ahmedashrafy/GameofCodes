@@ -1,2 +1,0 @@
-# GameofCodes
-GameofCodes - Sokoban
