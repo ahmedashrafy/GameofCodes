@@ -10,7 +10,7 @@ private:
     Text startGame, startSettings;
     Sprite background;
     RectangleShape playButton, settingsButton, volumeButton, box[3];
-    Texture playButtonTexture, settingsButtonTexture, volumeButtonTexture, backgroundTexture;
+    Texture playButtonTexture, settingsButtonTexture, volumeButtonTexture, backgroundTexture, buttonTexture;
 public:
     mainmenu();
     void draw(RenderWindow& window);

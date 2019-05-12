@@ -52,7 +52,7 @@ public:
     {
         
     }
-    virtual bool isFull(Block* Map[15][15])
+    virtual bool isFull(Block* Map[10][10])
     {
         return false;
     }
@@ -101,7 +101,7 @@ public:
     TargetBlock();
     ~TargetBlock();
     void setTheme(int themeNumber);
-    bool isFull(Block* Map[15][15]);
+    bool isFull(Block* Map[10][10]);
 };
 
 

@@ -7,9 +7,9 @@ class settingsmenu{
 private:
     Font font;
     Text texts[4];
-    RectangleShape themes[3], homeButton, box[2], selections[3], volumeButton;
+    RectangleShape themes[3], box[2], homeButton, selections[3], volumeButton;
     Sprite background;
-    Texture homeButtonTexture, backgroundTexture, textures[3], volumeButtonTexture;
+    Texture homeButtonTexture, backgroundTexture, textures[3], volumeButtonTexture, buttonTexture;
     
 public:
     settingsmenu();

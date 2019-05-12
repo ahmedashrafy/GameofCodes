@@ -7,7 +7,6 @@
 #include "mainmenu.hpp"
 #include "settingsmenu.hpp"
 
-void Display_Splash(RenderWindow& window);
 void Display_Menu(RenderWindow& window);
 bool Play_Game(RenderWindow& window, int Theme);
 

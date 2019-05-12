@@ -1,83 +1,57 @@
 #include "MainFunctions.hpp"
 
-
-void Display_Splash(RenderWindow& window)
-{
-    RectangleShape Splash;
-    Texture SplashTexture;
-    
-    SplashTexture.loadFromFile(resourcePath()+"Resources/Menu/SplashScreen.jpg");
-
-    Splash.setTexture(&SplashTexture);
-    Splash.setSize(Vector2f(1000,1000));
-    Splash.setPosition(0, 0);
-    
-    window.clear();
-    window.draw(Splash);
-    window.display();
-    
-    Clock clock;
-    while(clock.getElapsedTime()<seconds(10)) //While loop that will run as long as the time elapsed is less than 600 milliseconds
-    { };
-}
-
-
 bool Play_Game(RenderWindow& window, int Theme)
 {
-    Player* CurrentPlayer = new Jon;
-    Block* Map[15][15];
-    Block* Background[15][15];
-
-    Text text;
+    Player* CurrentPlayer = new Arya;
+    Block* Map[10][10];
+    Block* Background[10][10];
     
-    for (int i =0; i<15;i++)
+    for (int i =0; i<10;i++)
         {
-            for (int j =0; j<15; j++)
+            for (int j =0; j<10; j++)
             {
                 Background[i][j] = new SandBlock;
-                Background[i][j]->setPosition(j*50+100, i*50+100);
+                Background[i][j]->setPosition(j*100, i*100);
             }
         }
     
     bool GameOver = false;
     bool LevelWon = false;
+    bool RestartLevel = false;
+    bool Menu = false;
     
-    switch (Theme)
-    {
-        case 0:
-            CurrentPlayer = new Arya;
-            break;
-        case 1:
-            CurrentPlayer = new Jaime;
-            break;
-        case 2:
-            CurrentPlayer = new Jon;
-            break;
-        default:
-            CurrentPlayer = new Jon;
-            break; 
-    }
+    Text text;
+    Font font;
     
+    
+    font.loadFromFile(resourcePath() + "/Resources/Fonts/Counter.otf");
+    text.setFont(font);
+    text.setCharacterSize(50);
+    text.setFillColor(Color::Black);
+    text.setPosition(600, 20);
+
     for (int level = 1; level <100; level++)
     {
+        
         GameOver = false;
         LevelWon = false;
         
-        Map_Parser(level, Map, CurrentPlayer);
+        Map_Parser(level, Map, CurrentPlayer, Theme);
         Change_Theme(Theme, Map, Background);
-        
         Render_Game(window, Map, CurrentPlayer, text, Background);
 
-        while(window.isOpen())
+        while(window.isOpen() && !LevelWon && !GameOver &&!RestartLevel)
         {
-            if(!GameOver && !LevelWon)
-            {
-                Handle_Game(window, CurrentPlayer, Map, text, Background);
+                text.setString("LeveL: "+to_string(level)+" - "+"Lives: "+to_string(CurrentPlayer->getLives())+" - "+"Moves: "+to_string(CurrentPlayer->getMoves()));
+                Handle_Game(window, CurrentPlayer, Map, text, Background, RestartLevel, Menu);
+            
                 Render_Game(window, Map, CurrentPlayer, text, Background);
                 
                 LevelWon = playerWon(CurrentPlayer, Map);
                 GameOver = isOver(CurrentPlayer, Map);
-            }
+            
+                if(Menu) return true;
+                if(RestartLevel) level--;
         }
         if(GameOver) level = 101 ;
     }
@@ -108,9 +82,7 @@ void Display_Menu(RenderWindow& window)
     {
         //Wait for input
         Handle_Menu(window);
-        
-        //menu.mousePress(0, window);
-        
+                
         if(menu.mousePress(1, window))
         {
             Play_Sound(SoundF+1, Buffer+1, 5, sound);

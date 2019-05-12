@@ -24,7 +24,13 @@ mainmenu::mainmenu()
     if (!playButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/playbutton.png")) {
         cout<<"Error failed to load play button"<<endl;
     }
-    box[0].setFillColor(Color::White);
+    //Button texture
+    if (!buttonTexture.loadFromFile(resourcePath() + "/Resources/Menu/MenuTexture.png")) {
+        cout<<"Error failed to load play button"<<endl;
+    }
+    
+    //box[0].setFillColor(Color::White);
+    box[0].setTexture(&buttonTexture);
     box[0].setPosition(Vector2f(100, 600));
     box[0].setSize(Vector2f(350,75));
     playButton.setTexture(&playButtonTexture);
@@ -37,7 +43,8 @@ mainmenu::mainmenu()
     {
         std::cout << "Failed to load settings button spritesheet!" << endl;
     }
-    box[1].setFillColor(Color::White);
+    //box[1].setFillColor(Color::White);
+    box[1].setTexture(&buttonTexture);
     box[1].setPosition(Vector2f(600, 600));
     box[1].setSize(Vector2f(275,75));
     settingsButton.setTexture(&settingsButtonTexture);
@@ -49,7 +56,8 @@ mainmenu::mainmenu()
     {
         std::cout << "Failed to load volume button spritesheet!" << endl;
     }
-    box[2].setFillColor(Color::White);
+    //box[2].setFillColor(Color::White);
+    box[2].setTexture(&buttonTexture);
     box[2].setPosition(Vector2f(900, 50));
     box[2].setSize(Vector2f(75,75));
     volumeButton.setTexture(&volumeButtonTexture);

@@ -17,6 +17,10 @@
         Player();
         ~Player();
         virtual Sprite getSprite() const;
+        virtual Sprite* getSpriteAddress()
+        {
+            return &sprite; 
+        }
         virtual int getrow() const;
         virtual int getcol() const;
         virtual void addLives(int addedLives)
@@ -133,6 +137,10 @@
         {
             Lives--;
             Moves += 15;
+        }
+        virtual void removeMove()
+        {
+            Moves--;
         }
     };
 

@@ -3,7 +3,7 @@
 //Parent Class: Block
 Block::Block()
 {
-    Object.setSize(Vector2f(50,50));
+    Object.setSize(Vector2f(100,100));
     Special = 0;
 }
 
@@ -80,12 +80,15 @@ void MovingBlock::setTheme(int themeNumber)
     
     switch(themeNumber)
     {
-        case 1:
+        case 0:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_1/Moveable_Block.png");
-        case 2:
+            break;
+        case 1:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_2/Moveable_Block.png");
-        case 3:
+            break;
+        case 2:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_3/Moveable_Block.png");
+            break;
     }
     
     Object.setTexture(&temp);
@@ -116,12 +119,15 @@ void WallBlock::setTheme(int themeNumber)
     
     switch(themeNumber)
     {
-        case 1:
+        case 0:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_1/Wall_Block.png");
-        case 2:
+            break;
+        case 1:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_2/Wall_Block.png");
-        case 3:
+            break;
+        case 2:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_3/Wall_Block.png");
+            break;
     }
     
     Object.setTexture(&temp);
@@ -171,21 +177,24 @@ void TargetBlock::setTheme(int themeNumber)
     
     switch(themeNumber)
     {
-        case 1:
+        case 0:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_1/Target_Block.png");
-        case 2:
+            break;
+        case 1:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_2/Target_Block.png");
-        case 3:
+            break;
+        case 2:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_3/Target_Block.png");
+            break;
     }
     
     Object.setTexture(&temp);
 }
-bool TargetBlock::isFull(Block* Map[15][15])
+bool TargetBlock::isFull(Block* Map[10][10])
 {
-    for (int i =0; i<15; i++)
+    for (int i =0; i<10; i++)
     {
-        for (int j=0; j<15; j++)
+        for (int j=0; j<10; j++)
         {
             if (Map[i][j]->getID()=="MovingBlock" && blockHere(Map[i][j]))
             {
@@ -219,12 +228,15 @@ void SandBlock::setTheme(int themeNumber)
     
     switch(themeNumber)
     {
-        case 1:
+        case 0:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_1/Sand_Block.png");
-        case 2:
+            break;
+        case 1:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_2/Sand_Block.png");
-        case 3:
+            break;
+        case 2:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_3/Sand_Block.png");
+            break;
     }
     
     Object.setTexture(&temp);
@@ -256,12 +268,15 @@ void AddLives::setTheme(int themeNumber)
     
     switch(themeNumber)
     {
-        case 1:
+        case 0:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_1/Add_Lives.png");
-        case 2:
+            break;
+        case 1:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_2/Add_Lives.png");
-        case 3:
+            break;
+        case 2:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_3/Add_Lives.png");
+            break;
     }
     
     Object.setTexture(&temp);
@@ -299,12 +314,15 @@ void AddMoves::setTheme(int themeNumber)
     
     switch(themeNumber)
     {
-        case 1:
+        case 0:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_1/Add_Moves.png");
-        case 2:
+            break;
+        case 1:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_2/Add_Moves.png");
-        case 3:
+            break;
+        case 2:
             temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_3/Add_Moves.png");
+            break; 
     }
     
     Object.setTexture(&temp);

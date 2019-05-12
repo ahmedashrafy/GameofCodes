@@ -15,22 +15,26 @@ settingsmenu::settingsmenu()
     background.setTexture(backgroundTexture);
     
     //Seelcetions
-    if (!textures[0].loadFromFile(resourcePath() + "/Resources/Players/Arya/Character Selection.png")) {
+    if (!textures[0].loadFromFile(resourcePath() + "/Resources/Menu/Arya_selection.003.png")) {
         cout<<"Error failed to load arya selection"<<endl;
     }
-    if (!textures[1].loadFromFile(resourcePath() + "/Resources/Players/Jaime/Character Selection.png")) {
+    if (!textures[1].loadFromFile(resourcePath() + "/Resources/Menu/jamie.jpeg")) {
         cout<<"Error failed to load arya selection"<<endl;
     }
-    if (!textures[2].loadFromFile(resourcePath() + "/Resources/Players/Jon/Character Selection.png")) {
+    if (!textures[2].loadFromFile(resourcePath() + "/Resources/Menu/jon.jpeg")) {
         cout<<"Error failed to load arya selection"<<endl;
     }
-    
+    //Button texture
+    if (!buttonTexture.loadFromFile(resourcePath() + "/Resources/Menu/MenuTexture.png")) {
+        cout<<"Error failed to load play button"<<endl;
+    }
     //Volume Button
     if (!volumeButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/volumebutton.png"))
     {
         std::cout << "Failed to load volume button spritesheet!" << endl;
     }
-    box[1].setFillColor(Color::White);
+    //box[1].setFillColor(Color::White);
+    box[1].setTexture(&buttonTexture);
     box[1].setPosition(Vector2f(900, 50));
     box[1].setSize(Vector2f(75,75));
     volumeButton.setTexture(&volumeButtonTexture);
@@ -38,7 +42,7 @@ settingsmenu::settingsmenu()
     volumeButton.setSize(Vector2f(75,75));
     
     //Home Button
-    if (!homeButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/homeButton.jpg")) {
+    if (!homeButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/homeButton.png")) {
         cout << "Failed to load home button spritesheet!" <<endl;
     }
     
@@ -47,7 +51,8 @@ settingsmenu::settingsmenu()
     homeButton.setSize(Vector2f(75,75));
     box[0].setPosition(Vector2f(50, 50));
     box[0].setSize(Vector2f(75,75));
-    box[0].setFillColor(Color::White);
+    box[0].setTexture(&buttonTexture);
+    //box[0].setFillColor(Color::White);
     
     //Text            //Red (167,14,14)   Brown (150,128,75)
     //Title
@@ -58,7 +63,8 @@ settingsmenu::settingsmenu()
     texts[0].setString("Theme Selection");
     //Theme Buttons
     for(int i=0;i<3;i++){
-        themes[i].setFillColor(Color::White);
+        //themes[i].setFillColor(Color::White);
+        themes[i].setTexture(&buttonTexture);
         themes[i].setPosition(Vector2f(250,270+ 200*i));
         themes[i].setSize(Vector2f(500,200));
         themes[i].setOutlineColor(Color(150,128,75));
@@ -88,9 +94,10 @@ settingsmenu::settingsmenu()
 void settingsmenu::draw(RenderWindow& window) {
     window.clear();
     window.draw(background);
-    window.draw(box[1]);
+    window.draw(box[0]);
     window.draw(homeButton);
-    window.draw(volumeButton);
+    
+    //window.draw(volumeButton);
     for(int i=0;i<3;i++){
         window.draw(themes[i]);
         window.draw(selections[i]);
@@ -108,10 +115,10 @@ bool settingsmenu::mousePressed(int buttonNum, RenderWindow &window) {
         case 0: //Theme Arya button
             if (themes[0].getGlobalBounds().contains(Mouse::getPosition(window).x, Mouse::getPosition(window).y)) {
                 if (Mouse::isButtonPressed(Mouse::Left) && Event::MouseButtonReleased){
-                    if(themes[0].getFillColor()==Color::White)
-                        themes[0].setFillColor(Color(128,128,128));
-                    else
-                        themes[0].setFillColor(Color::White);
+                    //if(themes[0].getFillColor()==Color::White)
+                        //themes[0].setFillColor(Color(128,128,128));
+                    //else
+                        //themes[0].setFillColor(Color::White);
                     return true;
                 }
                 return false;
@@ -120,10 +127,10 @@ bool settingsmenu::mousePressed(int buttonNum, RenderWindow &window) {
         case 1: //Theme Cersei button
             if (themes[1].getGlobalBounds().contains(Mouse::getPosition(window).x, Mouse::getPosition(window).y)) {
                 if (Mouse::isButtonPressed(Mouse::Left) && Event::MouseButtonReleased){
-                    if(themes[1].getFillColor()==Color::White)
-                        themes[1].setFillColor(Color(128,128,128));
-                    else
-                        themes[1].setFillColor(Color::White);
+                    //if(themes[1].getFillColor()==Color::White)
+                        //themes[1].setFillColor(Color(128,128,128));
+                    //else
+                        //themes[1].setFillColor(Color::White);
                     return true;
                 }
                 return false;
@@ -132,10 +139,10 @@ bool settingsmenu::mousePressed(int buttonNum, RenderWindow &window) {
         case 2: //Theme Jon button
             if (themes[2].getGlobalBounds().contains(Mouse::getPosition(window).x, Mouse::getPosition(window).y)) {
                 if (Mouse::isButtonPressed(Mouse::Left) && Event::MouseButtonReleased){
-                    if(themes[2].getFillColor()==Color::White)
-                        themes[2].setFillColor(Color(128,128,128));
-                    else
-                        themes[2].setFillColor(Color::White);
+                    //if(themes[2].getFillColor()==Color::White)
+                        //themes[2].setFillColor(Color(128,128,128));
+                    //else
+                        //themes[2].setFillColor(Color::White);
                     return true;
                 }
                 return false;
