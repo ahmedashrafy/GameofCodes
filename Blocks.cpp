@@ -19,7 +19,7 @@ MovingBlock::MovingBlock()
     ID = "MovingBlock";
     nID = 1;
     //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "/Resources/Blocks/Theme_1/MovingBlock.png")){
+    if(!temp.loadFromFile(resourcePath() + "/Resources/Blocks/Theme_1/Moveable_Block.png")){
         cout<<"3 ";
     }
     
@@ -81,11 +81,11 @@ void MovingBlock::setTheme(int themeNumber)
     switch(themeNumber)
     {
         case 1:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_1/Moving_Block.png");
+            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_1/Moveable_Block.png");
         case 2:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_2/Moving_Block.png");
+            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_2/Moveable_Block.png");
         case 3:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_3/Moving_Block.png");
+            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_3/Moveable_Block.png");
     }
     
     Object.setTexture(&temp);
@@ -98,7 +98,7 @@ WallBlock::WallBlock()
     ID = "WallBlock";
     nID = 2;
     //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "/Resources/Blocks/Theme_1/WallBlock.png")){
+    if(!temp.loadFromFile(resourcePath() + "Resources/Blocks/Theme_1/Wall_Block.png")){
         cout<<"1 ";
     }
     
@@ -153,7 +153,7 @@ TargetBlock::TargetBlock()
     ID = "TargetBlock";
     nID = 4;
     //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "/Resources/Blocks/Theme_1/TargetBlock.png")){
+    if(!temp.loadFromFile(resourcePath() + "/Resources/Blocks/Theme_1/Target_Block.png")){
         cout<<"2 ";
     }
     
@@ -202,7 +202,7 @@ SandBlock::SandBlock()
     ID = "SandBlock";
     nID = 5;
     //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "/Resources/Blocks/Theme_1/SandBlock.png")){
+    if(!temp.loadFromFile(resourcePath() + "/Resources/Blocks/Theme_1/Sand_Block.png")){
         cout<<"4 ";
     }
     
@@ -236,7 +236,7 @@ AddLives::AddLives()
     ID = "AddLives";
     nID = 6;
     //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "/Resources/Blocks/Theme_1/AddLives.png")){
+    if(!temp.loadFromFile(resourcePath() + "/Resources/Blocks/Theme_1/Add_Lives.png")){
         cout<<"5";
     }
     
@@ -279,7 +279,7 @@ AddMoves::AddMoves()
     ID = "AddMoves";
     nID = 7;
     //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "/Resources/Blocks/Theme_1/AddMoves.png")){
+    if(!temp.loadFromFile(resourcePath() + "/Resources/Blocks/Theme_1/Add_Moves.png")){
         cout<<"6 ";
     }
     
@@ -313,4 +313,4 @@ void AddMoves::Invoke (Player* CurrentPlayer)
 {
     CurrentPlayer->addMoves(3);
     Object.setPosition(100000, 100000); //Set's the objects position outside of the window (make-shift solution
-    }
+}

@@ -3,6 +3,8 @@
 settingsmenu::settingsmenu()
 {
     //Font
+    cout<<resourcePath()<<endl;
+    cout<<resourcePath() + "/Resources/Fonts/GameOfThrones.ttf"<<endl; 
     if (!font.loadFromFile(resourcePath() + "/Resources/Fonts/GameOfThrones.ttf")) {
         cout<<"Error failed to load font"<<endl;
     }

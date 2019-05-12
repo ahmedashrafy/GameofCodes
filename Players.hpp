@@ -70,28 +70,35 @@
                     
             }
         }
-        virtual bool move(int stepNumber, char direction)
+        virtual void move(int stepNumber, char direction)
         {
                 switch(direction)
                 {
                     case 'D':
                         sprite.move(0,stepNumber);
+                        animate(direction);
                         break;
                         
                     case 'U':
                         sprite.move(0, -stepNumber);
+                        animate(direction);
+
                         break;
                         
                     case 'R':
                         sprite.move(stepNumber, 0);
+                        animate(direction);
+
                         break;
                         
                     case 'L':
                         sprite.move(-stepNumber, 0);
+                        animate(direction);
+
                         break;
                 }
         }
-        virtual bool unmove(int stepNumber, char direction)
+        virtual void unmove(int stepNumber, char direction)
         {
             switch(direction)
             {
