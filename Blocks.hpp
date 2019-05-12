@@ -16,11 +16,11 @@ protected:
     
 public:
     virtual void setTheme(int themeNumber) = 0 ;
-    virtual bool move(int stepNumber, char direction)
+    virtual void move(int stepNumber, char direction)
     {
         
     }
-    virtual bool unmove(int stepNumber, char direction)
+    virtual void unmove(int stepNumber, char direction)
     {
         
     }
@@ -68,8 +68,8 @@ class MovingBlock: public Block
 public:
     MovingBlock();
     ~MovingBlock();
-    bool move(int stepNumber, char direction);
-    bool unmove(int stepNumber, char direction);
+    void move(int stepNumber, char direction);
+    void unmove(int stepNumber, char direction);
     void setTheme(int themeNumber);
 };
 

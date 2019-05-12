@@ -34,7 +34,7 @@
         texture.loadFromFile(resourcePath()+"/Resources/Players/Arya/Spritesheet.png");
         sprite.setTexture(texture);
         sprite.setTextureRect(*ir);
-        sprite.setScale(2.5, 2.5);
+        sprite.setScale(1, 1);
         
         Lives = 3;
         Moves = 15;
@@ -46,7 +46,7 @@
         texture.loadFromFile(resourcePath()+"/Resources/Players/Arya/Spritesheet.png");
         sprite.setTexture(texture);
         sprite.setTextureRect(*ir);
-        sprite.setScale(2.5, 2.5);
+        sprite.setScale(1, 1);
         
         Lives = l;
         Moves = s;
@@ -65,7 +65,7 @@
         texture.loadFromFile(resourcePath()+"/Resources/Players/Jaime/Spritesheet.png");
         sprite.setTexture(texture);
         sprite.setTextureRect(*ir);
-        sprite.setScale(2.5, 2.5);
+        sprite.setScale(1, 1);
         
         Lives = 3;
         Moves = 15;
@@ -77,7 +77,7 @@
         texture.loadFromFile(resourcePath()+"/Resources/Players/Jaime/Spritesheet.png");
         sprite.setTexture(texture);
         sprite.setTextureRect(*ir);
-        sprite.setScale(2.5, 2.5);
+        sprite.setScale(1, 1);
         
         Lives = l;
         Moves = s;
@@ -95,7 +95,7 @@
         texture.loadFromFile(resourcePath()+"/Resources/Players/Jon/Spritesheet.png");
         sprite.setTexture(texture);
         sprite.setTextureRect(*ir);
-        sprite.setScale(2.5, 2.5);
+        sprite.setScale(1, 1);
         
         Lives = 3;
         Moves = 15;
@@ -107,7 +107,7 @@
         texture.loadFromFile(resourcePath()+"/Resources/Players/Jon/Spritesheet.png");
         sprite.setTexture(texture);
         sprite.setTextureRect(*ir);
-        sprite.setScale(2.5, 2.5);
+        sprite.setScale(1, 1);
         
         Lives = l;
         Moves = s;

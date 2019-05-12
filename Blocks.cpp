@@ -19,7 +19,7 @@ MovingBlock::MovingBlock()
     ID = "MovingBlock";
     nID = 1;
     //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "/Resources/Blocks/Theme_1/Moveable_Block.png")){
+    if(!temp.loadFromFile(resourcePath() + "Resources/Blocks/Theme_1/Moveable_Block.png")){
         cout<<"3 ";
     }
     
@@ -31,7 +31,7 @@ MovingBlock::~MovingBlock()
     
 }
 
-bool MovingBlock::move(int stepNumber, char direction)
+void MovingBlock::move(int stepNumber, char direction)
 {
     switch(direction)
     {
@@ -52,7 +52,7 @@ bool MovingBlock::move(int stepNumber, char direction)
             break;
     }
 }
-bool MovingBlock::unmove(int stepNumber, char direction)
+void MovingBlock::unmove(int stepNumber, char direction)
 {
     switch(direction)
     {
@@ -81,11 +81,11 @@ void MovingBlock::setTheme(int themeNumber)
     switch(themeNumber)
     {
         case 1:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_1/Moveable_Block.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_1/Moveable_Block.png");
         case 2:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_2/Moveable_Block.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_2/Moveable_Block.png");
         case 3:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_3/Moveable_Block.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_3/Moveable_Block.png");
     }
     
     Object.setTexture(&temp);
@@ -117,11 +117,11 @@ void WallBlock::setTheme(int themeNumber)
     switch(themeNumber)
     {
         case 1:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_1/Wall_Block.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_1/Wall_Block.png");
         case 2:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_2/Wall_Block.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_2/Wall_Block.png");
         case 3:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_3/Wall_Block.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_3/Wall_Block.png");
     }
     
     Object.setTexture(&temp);
@@ -153,7 +153,7 @@ TargetBlock::TargetBlock()
     ID = "TargetBlock";
     nID = 4;
     //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "/Resources/Blocks/Theme_1/Target_Block.png")){
+    if(!temp.loadFromFile(resourcePath() + "Resources/Blocks/Theme_1/Target_Block.png")){
         cout<<"2 ";
     }
     
@@ -172,11 +172,11 @@ void TargetBlock::setTheme(int themeNumber)
     switch(themeNumber)
     {
         case 1:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_1/Target_Block.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_1/Target_Block.png");
         case 2:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_2/Target_Block.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_2/Target_Block.png");
         case 3:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_3/Target_Block.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_3/Target_Block.png");
     }
     
     Object.setTexture(&temp);
@@ -202,7 +202,7 @@ SandBlock::SandBlock()
     ID = "SandBlock";
     nID = 5;
     //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "/Resources/Blocks/Theme_1/Sand_Block.png")){
+    if(!temp.loadFromFile(resourcePath() + "Resources/Blocks/Theme_1/Sand_Block.png")){
         cout<<"4 ";
     }
     
@@ -220,11 +220,11 @@ void SandBlock::setTheme(int themeNumber)
     switch(themeNumber)
     {
         case 1:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_1/Sand_Block.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_1/Sand_Block.png");
         case 2:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_2/Sand_Block.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_2/Sand_Block.png");
         case 3:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_3/Sand_Block.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_3/Sand_Block.png");
     }
     
     Object.setTexture(&temp);
@@ -236,7 +236,7 @@ AddLives::AddLives()
     ID = "AddLives";
     nID = 6;
     //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "/Resources/Blocks/Theme_1/Add_Lives.png")){
+    if(!temp.loadFromFile(resourcePath() + "Resources/Blocks/Theme_1/Add_Lives.png")){
         cout<<"5";
     }
     
@@ -257,11 +257,11 @@ void AddLives::setTheme(int themeNumber)
     switch(themeNumber)
     {
         case 1:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_1/Add_Lives.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_1/Add_Lives.png");
         case 2:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_2/Add_Lives.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_2/Add_Lives.png");
         case 3:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_3/Add_Lives.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_3/Add_Lives.png");
     }
     
     Object.setTexture(&temp);
@@ -279,7 +279,7 @@ AddMoves::AddMoves()
     ID = "AddMoves";
     nID = 7;
     //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "/Resources/Blocks/Theme_1/Add_Moves.png")){
+    if(!temp.loadFromFile(resourcePath() + "Resources/Blocks/Theme_1/Add_Moves.png")){
         cout<<"6 ";
     }
     
@@ -300,11 +300,11 @@ void AddMoves::setTheme(int themeNumber)
     switch(themeNumber)
     {
         case 1:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_1/Add_Moves.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_1/Add_Moves.png");
         case 2:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_2/Add_Moves.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_2/Add_Moves.png");
         case 3:
-            temp.loadFromFile(resourcePath()+"/Resources/Blocks/Theme_3/Add_Moves.png");
+            temp.loadFromFile(resourcePath()+"Resources/Blocks/Theme_3/Add_Moves.png");
     }
     
     Object.setTexture(&temp);

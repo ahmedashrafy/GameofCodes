@@ -129,7 +129,7 @@
             return Moves;
         }
         
-        virtual int consumeLive()
+        virtual void consumeLive()
         {
             Lives--;
             Moves += 15;

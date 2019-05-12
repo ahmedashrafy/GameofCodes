@@ -6,7 +6,7 @@ void Display_Splash(RenderWindow& window)
     RectangleShape Splash;
     Texture SplashTexture;
     
-    SplashTexture.loadFromFile(resourcePath()+"/Resources/Menu/SplashScreen.jpg");
+    SplashTexture.loadFromFile(resourcePath()+"Resources/Menu/SplashScreen.jpg");
 
     Splash.setTexture(&SplashTexture);
     Splash.setSize(Vector2f(1000,1000));
@@ -24,9 +24,20 @@ void Display_Splash(RenderWindow& window)
 
 bool Play_Game(RenderWindow& window, int Theme)
 {
-    Player* CurrentPlayer;
+    Player* CurrentPlayer = new Jon;
     Block* Map[15][15];
+    Block* Background[15][15];
+
     Text text;
+    
+    for (int i =0; i<15;i++)
+        {
+            for (int j =0; j<15; j++)
+            {
+                Background[i][j] = new SandBlock;
+                Background[i][j]->setPosition(j*50+100, i*50+100);
+            }
+        }
     
     bool GameOver = false;
     bool LevelWon = false;
@@ -42,6 +53,9 @@ bool Play_Game(RenderWindow& window, int Theme)
         case 2:
             CurrentPlayer = new Jon;
             break;
+        default:
+            CurrentPlayer = new Jon;
+            break; 
     }
     
     for (int level = 1; level <100; level++)
@@ -50,22 +64,22 @@ bool Play_Game(RenderWindow& window, int Theme)
         LevelWon = false;
         
         Map_Parser(level, Map, CurrentPlayer);
-        Change_Theme(Theme, Map);
+        Change_Theme(Theme, Map, Background);
         
-        Render_Game(window, Map, CurrentPlayer, text);
+        Render_Game(window, Map, CurrentPlayer, text, Background);
 
         while(window.isOpen())
         {
             if(!GameOver && !LevelWon)
             {
-                Handle_Game(window, CurrentPlayer, Map, text);
-                Render_Game(window, Map, CurrentPlayer, text);
+                Handle_Game(window, CurrentPlayer, Map, text, Background);
+                Render_Game(window, Map, CurrentPlayer, text, Background);
                 
                 LevelWon = playerWon(CurrentPlayer, Map);
                 GameOver = isOver(CurrentPlayer, Map);
             }
         }
-        if(GameOver) level = 10 ;
+        if(GameOver) level = 101 ;
     }
     return true;
 }
