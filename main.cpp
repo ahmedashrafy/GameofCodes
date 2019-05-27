@@ -8,5 +8,6 @@ int main()
     RenderWindow win;
     win.create(VideoMode(1000, 1000), "Sobokan");
     
+    //Display_Splash(win);
     Display_Menu(win);
 }

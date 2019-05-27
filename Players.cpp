@@ -37,7 +37,7 @@
         sprite.setScale(2, 2);
         
         Lives = 3;
-        Moves = 15;
+        Moves = 30;
     }
 
     Arya::Arya(int l, int s, int x, int y)
@@ -70,7 +70,7 @@
         sprite.setScale(2, 2);
         
         Lives = 3;
-        Moves = 15;
+        Moves = 30;
     }
 
     Jaime::Jaime(int l, int s, int x, int y)
@@ -102,7 +102,7 @@
         sprite.setScale(2, 2);
         
         Lives = 3;
-        Moves = 15;
+        Moves = 30;
     }
 
     Jon::Jon(int l, int s, int x, int y)

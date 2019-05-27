@@ -9,13 +9,21 @@ class Block
 {
 protected:
     RectangleShape Object;
-    Texture temp;
     string ID;
     int nID;
     int Special;
     
 public:
-    virtual void setTheme(int themeNumber) = 0 ;
+    virtual void setTheme(int themeNumber, Texture& temp)
+    {
+        
+    };
+    
+    virtual void setTheme(Texture& BlockTexture)
+    {
+        Object.setTexture(&BlockTexture);
+    };
+    
     virtual void move(int stepNumber, char direction)
     {
         
@@ -70,7 +78,7 @@ public:
     ~MovingBlock();
     void move(int stepNumber, char direction);
     void unmove(int stepNumber, char direction);
-    void setTheme(int themeNumber);
+    void setTheme(int themeNumber, Texture& temp);
 };
 
 
@@ -80,7 +88,7 @@ class WallBlock: public Block
 public:
     WallBlock();
     ~WallBlock();
-    void setTheme(int themeNumber);
+    void setTheme(int themeNumber, Texture& temp);
 };
 
 
@@ -90,7 +98,7 @@ class EmptyBlock: public Block
 public:
     EmptyBlock();
     ~EmptyBlock();
-    void setTheme(int themeNumber);
+    void setTheme(int themeNumber, Texture& temp);
 };
 
 
@@ -100,7 +108,7 @@ class TargetBlock: public Block
 public:
     TargetBlock();
     ~TargetBlock();
-    void setTheme(int themeNumber);
+    void setTheme(int themeNumber, Texture& temp);
     bool isFull(Block* Map[10][10]);
 };
 
@@ -111,7 +119,7 @@ class SandBlock: public Block
 public:
     SandBlock();
     ~SandBlock();
-    void setTheme(int themeNumber);
+    void setTheme(int themeNumber, Texture& temp);
 };
 
 //Derived Class: Add Lives
@@ -120,7 +128,7 @@ class AddLives: public Block
 public:
     AddLives();
     ~AddLives();
-    void setTheme(int themeNumber);
+    void setTheme(int themeNumber, Texture& temp);
     void Invoke (Player* CurrentPlayer);
 };
 
@@ -131,7 +139,8 @@ class AddMoves: public Block
 public:
     AddMoves();
     ~AddMoves();
-    void setTheme(int themeNumber);
+    void setTheme(int themeNumber, Texture& temp);
     void Invoke(Player* CurrentPlayer);
 };
+
 #endif /* Blocks_hpp */

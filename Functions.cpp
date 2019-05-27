@@ -2,22 +2,6 @@
 
 void Map_Parser(int level, Block* Map [10] [10], Player* CurrentPlayer, int Theme)
 {
-    //Player switch
-        switch (Theme)
-        {
-            case 0:
-                CurrentPlayer = new Arya;
-                break;
-                
-            case 1:
-                CurrentPlayer = new Jaime;
-                break;
-                
-            case 2:
-                CurrentPlayer = new Jon;
-                break;
-        }
-
     //Level switch
     
         fstream file;
@@ -30,7 +14,6 @@ void Map_Parser(int level, Block* Map [10] [10], Player* CurrentPlayer, int Them
             cout<<"Unable to open file";
         }
         getline(file, temp);
-        //int counter=stoi(temp);
         for(int i=0;i<10;i++){
             getline(file, str[i]);
         }
@@ -129,17 +112,18 @@ void Play_Sound(Sound* Sound, SoundBuffer* Buffer, int index, bool SoundOn)
     }
 }
 
-void Change_Theme(int index, Block* Map [10] [10], Block* Background [10] [10])
+void Change_Theme(int index, Block* Map [10] [10], Block* Background [10] [10], Texture temp[7])
 {
     for (int i = 0; i<10; i++)
     {
         for (int j = 0; j<10; j++)
         {
-            Map[i][j]->setTheme(index);
-            Background[i][j]->setTheme(index);
+            Map[i][j]->setTheme(index, temp[(Map[i][j]->getnID())%7]);
+            Background[i][j]->setTheme(index, temp[(Background[i][j]->getnID())%7]);
         }
     }
 }
+
 
 void Movement_Handler (Player* CurrentPlayer, Block* Map[10][10],int stepNumber, char direction, RenderWindow* window, Text text, Block* Background [10] [10])
 {
@@ -174,7 +158,7 @@ void Movement_Handler (Player* CurrentPlayer, Block* Map[10][10],int stepNumber,
                                         for (int l=0; l<10; l++)
                                         {
                                             
-                                            if((Map[k][l]->blockHere(Map[i][j])) && (Map[k][l]->getID()=="WallBlock")) //We check that the Block does not intersect a Wall-Block Now
+                                            if((Map[k][l]->blockHere(Map[i][j])) && (Map[k][l]->getID()=="WallBlock" || Map[k][l]->getID()=="MovingBlock") && ((i != k) || (l != j))) //We check that the Block does not intersect a Wall-Block Now
                                             {
                                                 Map[i][j]->unmove(1, direction); //if yes, reverse direction of block
                                                 CurrentPlayer->unmove(1, direction); //if yes, reverse direction of player
@@ -190,12 +174,10 @@ void Movement_Handler (Player* CurrentPlayer, Block* Map[10][10],int stepNumber,
                                     break;
                                 case 7: //Add Moves
                                     Map[i][j]->Invoke(CurrentPlayer);
-                                    cout<<"ACTIVATED"<<endl;
                                     CurrentPlayer -> animate(direction);
                                     break; 
                                 case 6: //Add Lives
                                     Map[i][j]->Invoke(CurrentPlayer);
-                                    cout<<"ACTIVATED"<<endl;
                                     CurrentPlayer -> animate(direction);
                                     break;
                                 default:
@@ -221,6 +203,7 @@ void Movement_Handler (Player* CurrentPlayer, Block* Map[10][10],int stepNumber,
 }
 void Handle_Menu(RenderWindow &window)
 {
+    
     Event event;
     while(window.pollEvent(event))
     {
@@ -261,9 +244,11 @@ void Handle_Game(RenderWindow& window, Player* CurrentPlayer, Block* Map[10][10]
                 {
                     case Keyboard:: Space:
                         RestartLevel = true;
+                        break;
                     
                     case Keyboard:: Escape:
                         Menu = true;
+                        break; 
 
                     case Keyboard::Down:
                         Movement_Handler (CurrentPlayer, Map, 100, 'D', &window, text, Background);
@@ -398,4 +383,54 @@ Block* BlockRandomizer()
     {
         return new AddMoves;
     }
+}
+
+void SaveRecords (int Levels)
+{
+    ofstream output;
+    
+    srand(time(NULL));
+    int User_ID = rand()%1000000;
+    
+    time_t now = time(0);
+    string date = ctime(&now);
+    
+    output.open(resourcePath() + "/Resources/User_Records/"+to_string(User_ID)+".txt");
+    
+    output<<"User ID: "<<User_ID;
+    output<<"Completed Levels: "<<to_string(Levels);
+    output<<"Date Attempted: "<<date;
+}
+
+void DisplayHint (int Theme, RenderWindow& window)
+{
+    RectangleShape Hint;
+    Texture HintTexture;
+    
+    
+    switch (Theme)
+    {
+        case 0:
+            HintTexture.loadFromFile(resourcePath()+"/Resources/Hints/Hint1.png");
+            break;
+        case 1:
+            HintTexture.loadFromFile(resourcePath()+"/Resources/Hints/Hint2.png");
+            break;
+        case 2:
+            HintTexture.loadFromFile(resourcePath()+"/Resources/Hints/Hint3.png");
+            break;
+    }
+    
+    Hint.setSize(Vector2f(1000,1000));
+    Hint.setPosition(0, 0);
+    Hint.setTexture(&HintTexture);
+    
+    
+    window.clear();
+    window.draw(Hint);
+    window.display();
+    
+    Clock clock;
+    while(clock.getElapsedTime()<seconds(5)) //While loop that will run as long as the time elapsed is less than 600 milliseconds
+    { };
 }

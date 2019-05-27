@@ -18,12 +18,6 @@ MovingBlock::MovingBlock()
 {
     ID = "MovingBlock";
     nID = 1;
-    //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "Resources/Blocks/Theme_1/Moveable_Block.png")){
-        cout<<"3 ";
-    }
-    
-    Object.setTexture(&temp);
 }
 
 MovingBlock::~MovingBlock()
@@ -74,10 +68,8 @@ void MovingBlock::unmove(int stepNumber, char direction)
     }
 }
 
-void MovingBlock::setTheme(int themeNumber)
+void MovingBlock::setTheme(int themeNumber, Texture& temp)
 {
-    //Texture temp;
-    
     switch(themeNumber)
     {
         case 0:
@@ -100,12 +92,6 @@ WallBlock::WallBlock()
 {
     ID = "WallBlock";
     nID = 2;
-    //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "Resources/Blocks/Theme_1/Wall_Block.png")){
-        cout<<"1 ";
-    }
-    
-    Object.setTexture(&temp);
 }
 
 WallBlock::~WallBlock()
@@ -113,10 +99,8 @@ WallBlock::~WallBlock()
     
 }
 
-void WallBlock::setTheme(int themeNumber)
-{
-    //Texture temp;
-    
+void WallBlock::setTheme(int themeNumber, Texture& temp)
+{    
     switch(themeNumber)
     {
         case 0:
@@ -147,7 +131,7 @@ EmptyBlock::~EmptyBlock()
     
 }
 
-void EmptyBlock::setTheme(int themeNumber)
+void EmptyBlock::setTheme(int themeNumber, Texture& temp)
 {
     
 }
@@ -158,12 +142,6 @@ TargetBlock::TargetBlock()
 {
     ID = "TargetBlock";
     nID = 4;
-    //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "Resources/Blocks/Theme_1/Target_Block.png")){
-        cout<<"2 ";
-    }
-    
-    Object.setTexture(&temp);
 }
 
 TargetBlock::~TargetBlock()
@@ -171,10 +149,8 @@ TargetBlock::~TargetBlock()
     
 }
 
-void TargetBlock::setTheme(int themeNumber)
+void TargetBlock::setTheme(int themeNumber, Texture& temp)
 {
-    //Texture temp;
-    
     switch(themeNumber)
     {
         case 0:
@@ -210,22 +186,14 @@ SandBlock::SandBlock()
 {
     ID = "SandBlock";
     nID = 5;
-    //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "Resources/Blocks/Theme_1/Sand_Block.png")){
-        cout<<"4 ";
-    }
-    
-    Object.setTexture(&temp);
 }
 SandBlock::~SandBlock()
 {
     
 }
 
-void SandBlock::setTheme(int themeNumber)
+void SandBlock::setTheme(int themeNumber, Texture& temp)
 {
-    //Texture temp;
-    
     switch(themeNumber)
     {
         case 0:
@@ -247,13 +215,6 @@ AddLives::AddLives()
 {
     ID = "AddLives";
     nID = 6;
-    //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "Resources/Blocks/Theme_1/Add_Lives.png")){
-        cout<<"5";
-    }
-    
-    Object.setTexture(&temp);
-    
     Special = 1;
 }
 
@@ -262,10 +223,8 @@ AddLives::~AddLives()
     
 }
 
-void AddLives::setTheme(int themeNumber)
+void AddLives::setTheme(int themeNumber, Texture& temp)
 {
-    //Texture temp;
-    
     switch(themeNumber)
     {
         case 0:
@@ -293,13 +252,6 @@ AddMoves::AddMoves()
 {
     ID = "AddMoves";
     nID = 7;
-    //Texture temp;
-    if(!temp.loadFromFile(resourcePath() + "Resources/Blocks/Theme_1/Add_Moves.png")){
-        cout<<"6 ";
-    }
-    
-    Object.setTexture(&temp);
-    
     Special = 2;
 }
 
@@ -308,10 +260,8 @@ AddMoves::~AddMoves()
     
 }
 
-void AddMoves::setTheme(int themeNumber)
+void AddMoves::setTheme(int themeNumber, Texture& temp)
 {
-    //Texture temp;
-    
     switch(themeNumber)
     {
         case 0:
