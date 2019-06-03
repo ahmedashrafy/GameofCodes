@@ -7,9 +7,9 @@ class mainmenu
 {
 private:
     Font font;
-    Text startGame, startSettings;
+    Text startGame, startSettings, startMP;
     Sprite background;
-    RectangleShape playButton, settingsButton, volumeButton, box[3];
+    RectangleShape playButton, settingsButton, volumeButton, MPButton, box[4];
     Texture playButtonTexture, settingsButtonTexture, volumeButtonTexture, backgroundTexture, buttonTexture;
 public:
     mainmenu();

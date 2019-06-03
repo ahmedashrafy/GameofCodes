@@ -52,7 +52,7 @@ bool Play_Game(RenderWindow& window, int Theme)
                 CurrentPlayer = new Jon;
             }
         
-        Map_Parser(level, Map, CurrentPlayer, Theme);
+        Map_Parser(level, Map, Theme);
         Change_Theme(Theme, Map, Background, temp);
         Render_Game(window, Map, CurrentPlayer, text, Background);
 
@@ -82,6 +82,96 @@ bool Play_Game(RenderWindow& window, int Theme)
     }
     return true;
 }
+
+bool Play_MultiPlayer_Game(RenderWindow& window, int Theme)
+{
+    Player* Players[2];
+    Block* Map[10][10];
+    Block* Background[10][10];
+    Texture temp [7];
+    
+    
+    for (int i =0; i<10;i++)
+    {
+        for (int j =0; j<10; j++)
+        {
+            Background[i][j] = new SandBlock;
+            Background[i][j]->setPosition(j*100, i*100);
+        }
+    }
+    
+    bool GameOver = false;
+    bool LevelWon = false;
+    bool RestartLevel = false;
+    bool Menu = false;
+    
+    Text text;
+    Font font;
+    
+    
+    font.loadFromFile(resourcePath() + "/Resources/Fonts/Counter.otf");
+    text.setFont(font);
+    text.setCharacterSize(50);
+    text.setFillColor(Color::Black);
+    text.setPosition(500, 20);
+    
+    for (int level = 1; level <100; level++)
+    {
+        
+        GameOver = false;
+        LevelWon = false;
+        
+        for (int i = 0; i<2; i++)
+        {
+            if(Theme == 0)
+            {
+                Players[i] = new Arya;
+            }
+            else if(Theme == 1)
+            {
+                Players[i] = new Jaime;
+            }
+            else if (Theme == 2)
+            {
+                Players[i] = new Jon;
+            }
+        }
+        
+        Map_Parser(level, Map, Theme);
+        Change_Theme(Theme, Map, Background, temp);
+        Render_Game_MP(window, Map, Players, text, Background);
+        
+        while(window.isOpen() && !LevelWon && !GameOver)
+        {
+            text.setString("LeveL: "+to_string(level)+" - "+"Lives: "+to_string(Players[0]->getLives())+"/"+to_string(Players[1]->getLives())+" - "+"Moves: "+to_string(Players[0]->getMoves())+"/"+to_string(Players[1]->getMoves()));
+            
+            Handle_Game_MP(window, Players, Map, text, Background, RestartLevel, Menu);
+
+    
+            
+            Render_Game_MP(window, Map, Players, text, Background);
+
+            LevelWon = (playerWon(Players[0], Map) || playerWon(Players[1], Map)) ;
+            GameOver = (isOver(Players[0], Map) || isOver(Players[1], Map));
+            
+            if(Menu) return true;
+            if(RestartLevel)
+            {
+                DisplayHint (Theme, window);
+                RestartLevel = false;
+            }
+        }
+        
+        if(GameOver)
+        {
+            SaveRecords(level);
+            level = 101 ;
+        }
+    }
+    return true;
+}
+
+
 void Display_Menu(RenderWindow& window)
 {
     //Menu Items
@@ -189,6 +279,15 @@ void Display_Menu(RenderWindow& window)
                 clock.restart();
                 while(clock.getElapsedTime()<seconds(1.5)) //While loop that will run as long as the time elapsed is less than 600 milliseconds
                 { };
+            }
+            if(menu.mousePress(3, window))
+            {
+                main = false;
+                while(!main)
+                {
+                    Play_Sound(SoundF+1, Buffer+1, 5, sound);
+                    main = Play_MultiPlayer_Game(window, Theme);
+                }
             }
         }
         menu.draw(window);

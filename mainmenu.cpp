@@ -1,80 +1,102 @@
 #include "mainmenu.hpp"
 mainmenu::mainmenu()
 {
-    //Text
-    if (!font.loadFromFile(resourcePath() + "/Resources/Fonts/GameOfThrones.ttf")) {
-        cout<<"Error failed to load font"<<endl;
-    }
-    startGame.setFont(font);
-    startSettings.setFont(font);
-    startGame.setCharacterSize(30);
-    startSettings.setCharacterSize(30);
-    startSettings.setFillColor(Color::Black);
-    startGame.setFillColor(Color::Black);
-    startGame.setString("Classic Mode");
-    startSettings.setString("Settings");
+    //Setting Fonts
+        font.loadFromFile(resourcePath() + "/Resources/Fonts/GameOfThrones.ttf");
     
-    //Background
-    if (!backgroundTexture.loadFromFile(resourcePath() + "/Resources/Menu/start.001.png")) {
-        cout<<"Error failed to load splash screen"<<endl;
-    }
-    background.setTexture(backgroundTexture);
+        startGame.setFont(font);
+        startSettings.setFont(font);
+        startMP.setFont(font);
+    
+        startGame.setCharacterSize(30);
+        startSettings.setCharacterSize(30);
+        startMP.setCharacterSize(30);
+    
+        startSettings.setFillColor(Color::Black);
+        startGame.setFillColor(Color::Black);
+        startMP.setFillColor(Color::Black);
+    
+        startGame.setString("Classic Mode");
+        startSettings.setString("Settings");
+        startMP.setString("Multiplayer");
+    
+    //Setting the Background
+        backgroundTexture.loadFromFile(resourcePath() + "/Resources/Menu/start.001.png");
+        background.setTexture(backgroundTexture);
     
     //Play Button
-    if (!playButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/playbutton.png")) {
-        cout<<"Error failed to load play button"<<endl;
-    }
-    //Button texture
-    if (!buttonTexture.loadFromFile(resourcePath() + "/Resources/Menu/MenuTexture.png")) {
-        cout<<"Error failed to load play button"<<endl;
-    }
+        playButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/playbutton.png");
     
-    //box[0].setFillColor(Color::White);
-    box[0].setTexture(&buttonTexture);
-    box[0].setPosition(Vector2f(100, 600));
-    box[0].setSize(Vector2f(350,75));
-    playButton.setTexture(&playButtonTexture);
-    playButton.setPosition(Vector2f(100, 600));
-    playButton.setSize(Vector2f(75,75));
-    startGame.setPosition(180,620);
+    //Button texture
+        buttonTexture.loadFromFile(resourcePath() + "/Resources/Menu/MenuTexture.png");
+    
+    //Settings texture
+        settingsButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/settingsbutton.png");
+    
+    //Volume Button Texture
+        volumeButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/volumebutton.png");
+    
+    //Play Button
+        box[0].setTexture(&buttonTexture);
+        box[0].setPosition(Vector2f(350, 400));
+        box[0].setSize(Vector2f(350,75));
+        playButton.setTexture(&playButtonTexture);
+        playButton.setPosition(Vector2f(350, 400));
+        playButton.setSize(Vector2f(75,75));
+        startGame.setPosition(430,420);
+    
+    //Multiplayer Button
+        box[3].setTexture(&buttonTexture);
+        box[3].setPosition(Vector2f(350, 500));
+        box[3].setSize(Vector2f(350,75));
+        MPButton.setTexture(&playButtonTexture);
+        MPButton.setPosition(Vector2f(350, 500));
+        MPButton.setSize(Vector2f(75,75));
+        startMP.setPosition(430,520);
     
     //Settings Button
-    if (!settingsButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/settingsbutton.png"))
-    {
-        std::cout << "Failed to load settings button spritesheet!" << endl;
-    }
-    //box[1].setFillColor(Color::White);
-    box[1].setTexture(&buttonTexture);
-    box[1].setPosition(Vector2f(600, 600));
-    box[1].setSize(Vector2f(275,75));
-    settingsButton.setTexture(&settingsButtonTexture);
-    settingsButton.setPosition(Vector2f(600, 600));
-    settingsButton.setSize(Vector2f(75,75));
-    startSettings.setPosition(680,620);
+        box[1].setTexture(&buttonTexture);
+        box[1].setPosition(Vector2f(350, 600));
+        box[1].setSize(Vector2f(350,75));
+        settingsButton.setTexture(&settingsButtonTexture);
+        settingsButton.setPosition(Vector2f(350, 600));
+        settingsButton.setSize(Vector2f(75,75));
+        startSettings.setPosition(430,620);
+    
     //Volume Button
-    if (!volumeButtonTexture.loadFromFile(resourcePath() + "/Resources/Menu/volumebutton.png"))
-    {
-        std::cout << "Failed to load volume button spritesheet!" << endl;
-    }
-    //box[2].setFillColor(Color::White);
-    box[2].setTexture(&buttonTexture);
-    box[2].setPosition(Vector2f(900, 50));
-    box[2].setSize(Vector2f(75,75));
-    volumeButton.setTexture(&volumeButtonTexture);
-    volumeButton.setPosition(Vector2f(900, 50));
-    volumeButton.setSize(Vector2f(75,75));
+        box[2].setTexture(&buttonTexture);
+        box[2].setPosition(Vector2f(900, 50));
+        box[2].setSize(Vector2f(75,75));
+        volumeButton.setTexture(&volumeButtonTexture);
+        volumeButton.setPosition(Vector2f(900, 50));
+        volumeButton.setSize(Vector2f(75,75));
 }
 
-void mainmenu::draw(RenderWindow& window) {
+void mainmenu::draw(RenderWindow& window)
+{
     window.clear();
-    window.draw(background);
-    for(int i=0;i<3;i++)
-        window.draw(box[i]);
+    
+    //Drawing the Background
+        window.draw(background);
+    
+    //Drawing the boxes
+        for(int i=0;i<4;i++)
+        {
+            window.draw(box[i]);
+        }
+    
+    //Drawing the buttons
     window.draw(playButton);
     window.draw(settingsButton);
     window.draw(volumeButton);
+    window.draw(MPButton);
+    
+    //Drawing the Text
     window.draw(startSettings);
     window.draw(startGame);
+    window.draw(startMP);
+
+    
     window.display();
 }
 
@@ -96,6 +118,13 @@ bool mainmenu::mousePress(int buttonNum, RenderWindow &window) {
             break;
         case 2: //Volume Button
             if (box[2].getGlobalBounds().contains(Mouse::getPosition(window).x, Mouse::getPosition(window).y)) {
+                if (Mouse::isButtonPressed(Mouse::Left) && Event::MouseButtonReleased)
+                    return true;
+                return false;
+            }
+            break;
+        case 3: //MultiPlayer Button
+            if (box[3].getGlobalBounds().contains(Mouse::getPosition(window).x, Mouse::getPosition(window).y)) {
                 if (Mouse::isButtonPressed(Mouse::Left) && Event::MouseButtonReleased)
                     return true;
                 return false;

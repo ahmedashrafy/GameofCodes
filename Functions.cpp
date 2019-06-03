@@ -1,6 +1,6 @@
 #include "Functions.hpp"
 
-void Map_Parser(int level, Block* Map [10] [10], Player* CurrentPlayer, int Theme)
+void Map_Parser(int level, Block* Map [10] [10], int Theme)
 {
     //Level switch
     
@@ -50,7 +50,6 @@ void Map_Parser(int level, Block* Map [10] [10], Player* CurrentPlayer, int Them
                 else if(str[i][j]=='$'){
                     Map[i][j]= new SandBlock;
                     Map[i][j]->setPosition(j*100, i*100);
-                    CurrentPlayer->getSprite().setPosition(j*100, i*100);
                 }
                 else if(str[i][j]=='+')
                 {
@@ -66,7 +65,7 @@ void Map_Parser(int level, Block* Map [10] [10], Player* CurrentPlayer, int Them
         }
     if(level>7)
     {
-        RandomLevelGenerator(Map, CurrentPlayer);
+        RandomLevelGenerator(Map);
     }
 }
 void Play_Sound(Sound* Sound, SoundBuffer* Buffer, int index, bool SoundOn)
@@ -168,18 +167,22 @@ void Movement_Handler (Player* CurrentPlayer, Block* Map[10][10],int stepNumber,
                                         }
                                     }
                                     break;
+                                    
                                 case 2: //Wall Block
                                     CurrentPlayer->unmove(1, direction); //if yes, reverse direction
                                     PlayerMoved = false; // Mark the Player as moved
                                     break;
+                                    
                                 case 7: //Add Moves
                                     Map[i][j]->Invoke(CurrentPlayer);
                                     CurrentPlayer -> animate(direction);
-                                    break; 
+                                    break;
+                                    
                                 case 6: //Add Lives
                                     Map[i][j]->Invoke(CurrentPlayer);
                                     CurrentPlayer -> animate(direction);
                                     break;
+                                    
                                 default:
                                     CurrentPlayer -> animate(direction);
                                     break;
@@ -277,6 +280,82 @@ void Handle_Game(RenderWindow& window, Player* CurrentPlayer, Block* Map[10][10]
     }
 }
 
+void Handle_Game_MP(RenderWindow& window, Player* Players[2], Block* Map[10][10], Text text, Block* Background [10] [10], bool& RestartLevel, bool& Menu)
+{
+    int iX0 = Players[0]->getSpriteAddress()->getPosition().x;
+    int iY0 = Players[0]->getSpriteAddress()->getPosition().y;
+    
+    int iX1 = Players[1]->getSpriteAddress()->getPosition().x;
+    int iY1 = Players[1]->getSpriteAddress()->getPosition().y;
+    
+    
+    
+    Event event;
+    while(window.pollEvent(event))
+    {
+        switch(event.type)
+        {
+            case Event::Closed:
+                window.close();
+                break;
+                
+            case Event::KeyReleased:
+                switch (event.key.code)
+            {
+                case Keyboard:: Space:
+                    RestartLevel = true;
+                    break;
+                    
+                case Keyboard:: Escape:
+                    Menu = true;
+                    break;
+                    
+                    //Player 1 controls
+                case Keyboard::S:
+                    Movement_Handler (Players[0], Map, 100, 'D', &window, text, Background);
+                    if(iX0 != Players[0]->getSpriteAddress()->getPosition().x || iY0 != Players[0]->getSpriteAddress()->getPosition().y) Players[0]->removeMove();
+                    break;
+                    
+                case Keyboard::W:
+                    Movement_Handler (Players[0], Map, 100, 'U', &window, text, Background);
+                    if(iX0 != Players[0]->getSpriteAddress()->getPosition().x || iY0 != Players[0]->getSpriteAddress()->getPosition().y) Players[0]->removeMove();
+                    break;
+                    
+                case Keyboard::D:
+                    Movement_Handler (Players[0], Map, 100, 'R', &window, text, Background);
+                    if(iX0 != Players[0]->getSpriteAddress()->getPosition().x || iY0 != Players[0]->getSpriteAddress()->getPosition().y) Players[0]->removeMove();
+                    break;
+                    
+                case Keyboard::A:
+                    Movement_Handler (Players[0], Map, 100, 'L', &window, text, Background);
+                    if(iX0 != Players[0]->getSpriteAddress()->getPosition().x || iY0 != Players[0]->getSpriteAddress()->getPosition().y) Players[0]->removeMove();
+                    break;
+                    
+                    //Player 2 controls
+                case Keyboard::Down:
+                    Movement_Handler (Players[1], Map, 100, 'D', &window, text, Background);
+                    if(iX1 != Players[1]->getSpriteAddress()->getPosition().x || iY1 != Players[1]->getSpriteAddress()->getPosition().y) Players[1]->removeMove();
+                    break;
+                case Keyboard::Up:
+                    Movement_Handler (Players[1], Map, 100, 'U', &window, text, Background);
+                    if(iX1 != Players[1]->getSpriteAddress()->getPosition().x || iY1 != Players[1]->getSpriteAddress()->getPosition().y) Players[1]->removeMove();
+                    break;
+                    
+                case Keyboard::Right:
+                    Movement_Handler (Players[1], Map, 100, 'R', &window, text, Background);
+                    if(iX1 != Players[1]->getSpriteAddress()->getPosition().x || iY1 != Players[1]->getSpriteAddress()->getPosition().y) Players[1]->removeMove();
+                    break;
+                case Keyboard::Left:
+                    Movement_Handler (Players[1], Map, 100, 'L', &window, text, Background);
+                    if(iX1 != Players[1]->getSpriteAddress()->getPosition().x || iY1 != Players[1]->getSpriteAddress()->getPosition().y) Players[1]->removeMove();
+                    break;
+            }
+                break;
+        }
+    }
+}
+
+
 void Render_Game (RenderWindow& window, Block* Map[10][10], Player* CurrentPlayer, Text text, Block* Background[10][10])
 {
     window.clear();
@@ -313,6 +392,45 @@ void Render_Game (RenderWindow& window, Block* Map[10][10], Player* CurrentPlaye
     
 }
 
+void Render_Game_MP (RenderWindow& window, Block* Map[10][10], Player* Players[2], Text text, Block* Background[10][10])
+{
+    window.clear();
+    
+    //Draw Map
+    for (int i = 0; i<10; i++)
+    {
+        for (int j = 0;  j<10; j++)
+        {
+            window.draw(Background[i][j]->getRectangle());
+            if(!(Map[i][j]->getID()=="MovingBlock"))
+            {
+                window.draw(Map[i][j]->getRectangle());
+            }
+        }
+    }
+    
+    //Draw Moveable Blocks
+    for (int i = 0; i<10; i++)
+    {
+        for (int j = 0;  j<10; j++)
+        {
+            if(Map[i][j]->getID()=="MovingBlock") window.draw(Map[i][j]->getRectangle());
+        }
+    }
+    
+    //Draw Player
+    for (int i = 0; i<2; i++)
+    {
+        window.draw(Players[i]->getSprite());
+    }
+    
+    //Draw Text
+    window.draw(text);
+    
+    window.display();
+    
+}
+
 bool isOver(Player* CurrentPlayer, Block* Map[10][10])
 {
     if(CurrentPlayer->getLives()<0 || (CurrentPlayer->getMoves()<1 && CurrentPlayer->getLives()<0))
@@ -341,7 +459,7 @@ bool playerWon(Player* CurrentPlayer, Block* Map[10][10])
     }
     return true;
 }
-void RandomLevelGenerator(Block* Map [10] [10], Player* CurrentPlayer)
+void RandomLevelGenerator(Block* Map [10] [10])
 {
     for(int i =0; i<10; i++)
     {

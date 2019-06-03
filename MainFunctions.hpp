@@ -10,6 +10,8 @@
 void Display_Menu(RenderWindow& window);
 bool Play_Game(RenderWindow& window, int Theme);
 void Display_Splash(RenderWindow& window);
+bool Play_MultiPlayer_Game(RenderWindow& window, int Theme);
+
 
 
 #endif /* MainFunctions_hpp */
